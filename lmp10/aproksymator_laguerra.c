@@ -6,16 +6,7 @@
 #include <float.h>
 #include <math.h>
 
-#define delta 1.0e-6
-
-int silnia(int n)
-{
-	if (n == 0)
-		return 1;
-	if (n == 1)
-		return 1;
-	return n*silnia(n-1);
-}
+#define DEBUG
 
 double laguerr(int n, int alfa, double x)
 {
@@ -130,6 +121,6 @@ void make_spl(points_t * pts, spline_t * spl, int baza)
 	}
 #endif
 
-	free(eqs);
+	free_matrix(eqs);
 
 }

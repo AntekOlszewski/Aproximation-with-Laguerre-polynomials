@@ -11,7 +11,7 @@ realloc_pts_failed (points_t * pts, int size)
 void free_pts(points_t * pts) {
 	free(pts->x);
 	free(pts->y);
-	free(pts);
+	
 }
 int
 read_pts_failed (FILE * inf, points_t * pts)
