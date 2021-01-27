@@ -129,7 +129,7 @@ void make_spl(points_t * pts, spline_t * spl, int baza)
 		fclose(tst);
 	}
 #endif
-	free_spl(spl);
+
 	free(eqs);
 
 }
