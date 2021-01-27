@@ -15,6 +15,14 @@ alloc_spl (spline_t * spl, int n)
     || MALLOC_FAILED (spl->f3, spl->n);
 }
 
+void free_spl (spline_t *spl) {
+	free(spl->f);	
+	free(spl->f1);
+	free(spl->f2);
+	free(spl->f3);
+	free(spl);
+}
+
 int
 read_spl (FILE * inf, spline_t * spl)
 {

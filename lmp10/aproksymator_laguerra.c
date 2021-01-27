@@ -16,6 +16,7 @@ int silnia(int n)
 		return 1;
 	return n*silnia(n-1);
 }
+
 double laguerr(int n, int alfa, double x)
 {
 	if (n==0)
@@ -44,7 +45,7 @@ void make_spl(points_t * pts, spline_t * spl, int baza)
 	int		i, j, k;
 	
   
-	eqs = make_matrix(nb, nb + 1);
+	eqs = make_matrix(baza, baza + 1);
 
 #ifdef DEBUG
 #define TESTBASE 500
@@ -54,10 +55,10 @@ void make_spl(points_t * pts, spline_t * spl, int baza)
 		for (i = 0; i < TESTBASE; i++) {
 			fprintf(tst, "%g", a + i * dx);
 			for (j = 0; j < baza; j++) {
-				fprintf(tst, " %g", fi  (j, a + i * dx));
-				fprintf(tst, " %g", dfi (j, a + i * dx));
-				fprintf(tst, " %g", d2fi(j, a + i * dx));
-				fprintf(tst, " %g", d3fi(j, a + i * dx));
+				fprintf(tst, " %g", laguerr  (j, 0,  a + i * dx));
+				fprintf(tst, " %g", pochodna(1, j, 0, a + i * dx));
+				fprintf(tst, " %g", pochodna(2, j, 0, a + i * dx));
+				fprintf(tst, " %g", pochodna(3, j, 0, a + i * dx));
 			}
 			fprintf(tst, "\n");
 		}
@@ -68,9 +69,9 @@ void make_spl(points_t * pts, spline_t * spl, int baza)
 	for (j = 0; j < baza; j++) {
 		for (i = 0; i < baza; i++)
 			for (k = 0; k < pts->n; k++)
-				add_to_entry_matrix(eqs, j, i, fi(i, x[k]) * fi( j, x[k]));
+				add_to_entry_matrix(eqs, j, i, laguerr(i, 0, x[k]) * laguerr( j, 0, x[k]));
 		for (k = 0; k < pts->n; k++)
-			add_to_entry_matrix(eqs, j, baza, y[k] * fi(j, x[k]));
+			add_to_entry_matrix(eqs, j, baza, y[k] * laguerr(j, 0, x[k]));
 	}
 
 #ifdef DEBUG
@@ -128,5 +129,7 @@ void make_spl(points_t * pts, spline_t * spl, int baza)
 		fclose(tst);
 	}
 #endif
+	free_spl(spl);
+	free(eqs);
 
 }

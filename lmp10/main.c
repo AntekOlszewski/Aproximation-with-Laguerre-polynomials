@@ -21,6 +21,9 @@ char *usage =
   "               - to_x defaults to x-coordinate of the last point\n"
   "               - n_points defaults to 100\n"
   "               - n_points must be > 1\n"
+  "            endfi \n"
+  "            if baza is given then\n"
+  "               reads the value and sets the basis function constant\n"        
   "            endif\n";
 
 int
@@ -31,7 +34,7 @@ main (int argc, char **argv)
   char *out = NULL;
   char *gpt = NULL;
   double fromX = 0;
-  double toX = 0;
+  double toX = 10;
   int n = 100;
   int baza = 10;
   char *progname= argv[0];
