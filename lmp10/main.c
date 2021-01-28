@@ -167,7 +167,8 @@ main (int argc, char **argv)
   }
 
   free_spl(&spl); 
-  free_pts(&pts);  
+  if ( inp != NULL)
+  	free_pts(&pts);  
 
-  return 0;
+return 0;
 }
