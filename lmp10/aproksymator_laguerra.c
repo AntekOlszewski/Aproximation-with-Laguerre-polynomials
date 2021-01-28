@@ -6,7 +6,7 @@
 #include <float.h>
 #include <math.h>
 
-#define DEBUG
+
 
 double laguerr(int n, int alfa, double x)
 {
